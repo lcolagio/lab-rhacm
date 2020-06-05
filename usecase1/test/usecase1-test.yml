@@ -78,7 +78,7 @@ EOF
 
 
 sleep 15
-curl -k https://$(oc get route  prometheus-example-app -o jsonpath='{.spec.host}')
+curl -k https://$(oc get route  prometheus-example-app -o jsonpath='{.spec.host}' -n usecase1-ns-test)
 
 sleep 60
 oc delete project usecase1-ns-test
