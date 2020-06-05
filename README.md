@@ -15,14 +15,6 @@ In this use case we are going to deploy a sample application `prometheus-example
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/placementrule.yaml
     ~~~
 
-   ~~~sh
-    # override
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/channel.yaml
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/application.yaml
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/subscription-override.yaml  
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/placementrule.yaml
-    ~~~
-
 2.  Check ACM components:
 
     created project
