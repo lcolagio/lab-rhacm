@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: prometheus-example-app
+  namespace: usecase1-ns
+  labels:
+    app: prometheus-example-app
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: prometheus-example-app
+    weight: 100
+  port:
+    targetPort: web
+  tls:
+    termination: edge
+  wildcardPolicy: None
