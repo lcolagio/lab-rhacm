@@ -1,0 +1,122 @@
+oc create -f - <<EOF
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: mssql-persistent
+
+--- 
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mssql-secret
+  namespace: mssql-persistent
+  labels:
+    app: mssql-container
+data:
+  mssql-password: UEBzc3cwcmQxIQ==
+type: Opaque
+
+---
+
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: mssql-persistent-sa
+  namespace: mssql-persistent
+  labels:
+    component: mssql-persistent
+
+EOF
+---
+
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: mssql-persistent-sa
+  namespace: mssql-persistent
+  labels:
+    component: mssql-persistent
+secrets:
+  - name: mssql-persistent-sa-dockercfg-knz8c
+  - name: mssql-persistent-sa-token-zbmcs
+imagePullSecrets:
+  - name: mssql-persistent-sa-dockercfg-knz8c
+
+
+oc create -f - <<EOF
+
+
+---
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: mssql-deployment
+  namespace: mssql-persistent
+  labels:
+    app: mssql-container
+spec:
+  strategy:
+    type: Recreate
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    name: mssql-container
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mssql-container
+        name: mssql-container
+    spec:
+      restartPolicy: Always
+      serviceAccountName: mssql-persistent-sa
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - resources:
+            limits:
+              cpu: '2'
+              memory: 3Gi
+            requests:
+              cpu: '2'
+              memory: 3Gi
+          terminationMessagePath: /dev/termination-log
+          name: mssql-container
+          env:
+            - name: ACCEPT_EULA
+              value: 'Y'
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql-secret
+                  key: mssql-password
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 1433
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: mssql-vol
+              mountPath: /var/opt/mssql/data
+          terminationMessagePolicy: File
+          image: 'quay.io/ocpmigrate/mssql-server:latest'
+      serviceAccount: mssql-persistent-sa
+      volumes:
+        - name: mssql-vol
+          persistentVolumeClaim:
+            claimName: mssql-pvc
+      dnsPolicy: ClusterFirst
+
+EOF
