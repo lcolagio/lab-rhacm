@@ -9,7 +9,7 @@ metadata:
     policy.mcm.ibm.com/controls: PR.AC-4 Access Control
 spec:
   complianceType: musthave
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   namespaces:
     exclude: ["kube-*"]
