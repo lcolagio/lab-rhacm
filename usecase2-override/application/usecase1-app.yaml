@@ -4,7 +4,7 @@ metadata:
   labels:
     app: prometheus-example-app
   name: prometheus-example-app
-  namespace: usecase1-app
+  namespace: usecase1-ns
 spec:
   replicas: 1
   selector:

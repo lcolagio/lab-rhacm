@@ -10,11 +10,6 @@ metadata:
     apps.open-cluster-management.io/github-branch: master 
 spec:
   channel: usecase1-channel/usecase1-channel
-#  overrides:
-#    - clusterName: /
-#      clusterOverrides:
-#        - path: metadata.namespace
-#          value: usecase1-ns
   placement:
     placementRef:
       name: usecase1-placementrule

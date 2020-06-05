@@ -2,7 +2,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: prometheus-example-app
-  namespace: usecase1-app
+  namespace: usecase1-ns
   labels:
     app: prometheus-example-app
   annotations:

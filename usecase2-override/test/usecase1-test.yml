@@ -1,0 +1,84 @@
+https://docs.openshift.com/container-platform/4.3/monitoring/monitoring-your-own-services.html
+
+oc create -f - <<EOF
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: usecase1-app
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheus-example-app
+  name: prometheus-example-app
+  namespace: usecase1-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-example-app
+  template:
+    metadata:
+      labels:
+        app: prometheus-example-app
+    spec:
+      containers:
+      - image: quay.io/brancz/prometheus-example-app:v0.2.0
+        imagePullPolicy: IfNotPresent
+        name: prometheus-example-app
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-example-app
+  name: prometheus-example-app
+  namespace: usecase1-app
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: web
+  selector:
+    app: prometheus-example-app
+  type: ClusterIP
+
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: prometheus-example-app
+  namespace: usecase1-app
+  labels:
+    app: prometheus-example-app
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: prometheus-example-app
+    weight: 100
+  port:
+    targetPort: web
+  tls:
+    termination: edge
+  wildcardPolicy: None
+  
+EOF
+
+
+sleep 15
+curl -k https://$(oc get route  prometheus-example-app -o jsonpath='{.spec.host}' -n usecase1-app)
+
+sleep 60
+# oc delete project usecase1-app

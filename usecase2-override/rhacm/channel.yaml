@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: usecase1-channel
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: usecase1-channel
+  namespace: usecase1-channel
+spec:
+  pathname: 'https://github.com/lcolagio/lab-rhacm.git'
+  type: github
