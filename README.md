@@ -48,7 +48,7 @@ In this use case we are going to deploy a sample application `prometheus-example
     usecase1-app              usecase1-subscription1-usecase1-application-usecase1-ns-namespace               Namespace       v1                                   83s
     ~~~
 
-4. How to edit an component ACM
+3. How to edit an component ACM
 
     ~~~sh
     # Edit subscription
@@ -61,7 +61,7 @@ In this use case we are going to deploy a sample application `prometheus-example
     ~~~
 
 
-3. How to Delete all created components for the sample application
+4. How to Delete all created components for the sample application
 
     ~~~sh
     # on cluster Hub
@@ -79,7 +79,7 @@ In this use case we are going to deploy a sample application `prometheus-example
     
     ~~~
 
-4. Edit oject managed with ACM
+5. Edit oject managed with ACM
 
     ~~~sh
     oc edit subscription usecase1-subscription1 -n usecase1-app
