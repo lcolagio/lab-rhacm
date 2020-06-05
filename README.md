@@ -84,3 +84,4 @@ In this use case we are going to deploy a sample application `prometheus-example
     ~~~sh
     oc edit subscription usecase1-subscription1 -n usecase1-app
     ~~~# lab-rhacm
+
