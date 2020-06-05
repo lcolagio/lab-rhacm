@@ -11,10 +11,10 @@ Let's explore the different ACM components we will be using in this example: `Ch
 1. Create a `Namespace` where we will store the ACM manifests for the application
 
     ~~~sh
-    oc create -f https://github.com/lcolagio/lab-rhacm.git/master/usecase1/rhacm/channel.yaml
-    oc create -f https://github.com/lcolagio/lab-rhacm.git/master/usecase1/rhacm/application.yaml
-    oc create -f https://github.com/lcolagio/lab-rhacm.git/master/usecase1/rhacm/subscription.yaml
-    oc create -f https://github.com/lcolagio/lab-rhacm.git/master/usecase1/rhacm/placementrule.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/channel.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/application.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/subscription.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/usecase1/rhacm/placementrule.yaml
     ~~~
 
 
