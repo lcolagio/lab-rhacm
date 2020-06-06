@@ -27,7 +27,7 @@ supplementalGroups:
   type: RunAsAny
 users:
 - system:admin
-- system:serviceaccount:mssql-persistent:mssql-persistent-sa
+- system:serviceaccount:usecase2-app:mssql-persistent-sa
 volumes:
 - awsElasticBlockStore
 - azureDisk
