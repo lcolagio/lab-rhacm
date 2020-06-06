@@ -1,0 +1,14 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: usecase2-placementrule
+  namespace: usecase2-app
+  labels:
+    app: usecase2
+spec:
+  clusterConditions:
+    - type: OK
+  clusterSelector:
+    matchExpressions: []
+    matchLabels:
+      usecase2: true
