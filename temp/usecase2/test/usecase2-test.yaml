@@ -126,6 +126,7 @@ spec:
   
 EOF
 
+### MSQL SERVER ###
 oc create -f - <<EOF
 
 ---
@@ -200,6 +201,7 @@ spec:
 
 EOF
 
+### APP ###
 
 oc create -f - <<EOF
 
@@ -253,5 +255,65 @@ spec:
   revisionHistoryLimit: 2
   progressDeadlineSeconds: 600
 
+EOF
+
+oc create -f - <<EOF
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mssql-app-service
+  namespace: mssql-persistent
+spec:
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: mssql-container-app
+#  clusterIP: 172.30.179.168
+  type: ClusterIP
+  sessionAffinity: None
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mssql-app-route
+  namespace: mssql-persistent
+spec:
+#  host: mssql-app-route-mssql-persistent.apps.d751.example.opentlc.com
+  path: /
+  to:
+    kind: Service
+    name: mssql-app-service
+    weight: 100
+  wildcardPolicy: None
+
+EOF
+
+
+oc create -f - <<EOF
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mssql-service
+  namespace: mssql-persistent
+spec:
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+      nodePort: 32001
+  selector:
+    app: mssql-container
+  clusterIP: 172.30.185.173
+  type: LoadBalancer  
+  externalIPs:
+    - 172.29.112.233
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
 
 EOF

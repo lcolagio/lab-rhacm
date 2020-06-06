@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mssql-app-service
+  namespace: usecase2-app
+spec:
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: mssql-container-app
+ # clusterIP: 172.30.179.168
+  type: ClusterIP
+  sessionAffinity: None
