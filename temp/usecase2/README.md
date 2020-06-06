@@ -9,6 +9,11 @@ In this use case we are going to deploy a sample application `mssql-example-app`
 1. Create the different ACM components we will be using in this example: `Channel`, `PlacementRule`, `Application` and `Subscription`:
 
     ~~~sh
+    # add use to scc mssql-persistent-scc
+    oc adm policy add-scc-to-user mssql-persistent-scc -z mssql-persistent-sa -n usecase2-ap
+    ~~~
+ 
+    ~~~sh
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase2/rhacm/channel.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase2/rhacm/application.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase2/rhacm/subscription.yaml
