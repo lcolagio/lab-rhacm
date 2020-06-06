@@ -64,15 +64,15 @@ In this use case we are going to deploy a sample application `prometheus-example
 
     ~~~sh
     # on cluster Hub
-        oc delete subscription usecase1-subscription1 -n usecase1-app
-        oc delete placementrule usecase1-placement -n usecase1-app
-        oc delete applications usecase1-applications -n usecase1-app
-        oc delete channel usecase1-channel -n usecase1-channel
+    oc delete subscription usecase1-subscription1 -n usecase1-app
+    oc delete placementrule usecase1-placement -n usecase1-app
+    oc delete applications usecase1-applications -n usecase1-app
+    oc delete channel usecase1-channel -n usecase1-channel
+    
     oc delete project usecase1-channel
     oc delete project usecase1-app
 
     # on managed cluster
-    oc delete project usecase1-ns
     oc delete project usecase1-app
 
     
