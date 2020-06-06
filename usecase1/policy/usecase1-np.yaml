@@ -4,12 +4,13 @@ metadata:
   name: policy-networkpolicy
   namespace: default
   annotations:
-    policy.mcm.ibm.com/standards: NIST-CSF
-    policy.mcm.ibm.com/categories: PR.AC Identity Management Authentication and Access Control
-    policy.mcm.ibm.com/controls: PR.AC-4 Access Control
+    policy.mcm.ibm.com/standards: Customer
+    policy.mcm.ibm.com/categories: Access Controm
+    policy.mcm.ibm.com/controls: Access Control 01 Ingress
 spec:
   complianceType: musthave
-  remediationAction: enforce
+  remediationAction: enforce  #   to inform only: inform
+
   disabled: false
   namespaces:
     exclude: ["kube-*"]

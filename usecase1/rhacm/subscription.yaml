@@ -1,16 +1,16 @@
-apiVersion: apps.open-cluster-management.io/v1
-kind: Subscription
-metadata:
-  name: usecase1-subscription1
-  namespace: usecase1-app
-  labels:
-    app: usecase1-app
-  annotations:
-    apps.open-cluster-management.io/github-path: usecase1/application
-    apps.open-cluster-management.io/github-branch: master 
-spec:
-  channel: usecase1-channel/usecase1-channel
-  placement:
-    placementRef:
-      name: usecase1-placementrule
-      kind: PlacementRule
+  apiVersion: apps.open-cluster-management.io/v1
+  kind: Subscription
+  metadata:
+    name: usecase1-subscription1
+    namespace: usecase1-app
+    labels:
+      app: usecase1-app
+    annotations:
+      apps.open-cluster-management.io/github-path: usecase1/application
+      apps.open-cluster-management.io/github-branch: master 
+  spec:
+    channel: usecase1-channel/usecase1-channel
+    placement:
+      placementRef:
+        name: usecase1-placementrule
+        kind: PlacementRule
