@@ -1,7 +1,7 @@
 kind: SecurityContextConstraints
 metadata:
   creationTimestamp: null
-  name: mssql-persistent-scc
+  name: usecase2-app-scc
   selfLink: /apis/security.openshift.io/v1/securitycontextconstraints/mssql-persistent-scc
 allowHostDirVolumePlugin: false
 allowHostIPC: false
