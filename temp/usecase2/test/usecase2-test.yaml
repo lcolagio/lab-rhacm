@@ -194,6 +194,8 @@ spec:
           image: 'quay.io/ocpmigrate/mssql-server:latest'
       serviceAccount: mssql-persistent-sa
       volumes:
+#        - name: mssql-vol
+#          emptyDir: {}    
         - name: mssql-vol
           persistentVolumeClaim:
             claimName: mssql-pvc
