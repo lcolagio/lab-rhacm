@@ -11,4 +11,4 @@ spec:
   clusterSelector:
     matchExpressions: []
     matchLabels:
-      usecase2: true
+      usecase2: deploy
