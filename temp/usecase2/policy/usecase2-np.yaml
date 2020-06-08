@@ -9,7 +9,7 @@ metadata:
     policy.mcm.ibm.com/controls: Access Control 01 - deny from other namespaces
 spec:
   complianceType: musthave
-  remediationAction: inform  #   to inform only: enforce
+  remediationAction: inform  #   to inform or enforce
 
   disabled: false
   namespaces:

@@ -9,7 +9,7 @@ metadata:
     policy.mcm.ibm.com/controls: Access Control 01 - ressourcequota
 spec:
   complianceType: musthave
-  remediationAction: enforce  #   to inform only: inform
+  remediationAction: inform  #   to inform or enforce
 
   disabled: false
   namespaces:
