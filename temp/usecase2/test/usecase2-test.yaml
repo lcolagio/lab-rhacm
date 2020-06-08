@@ -311,10 +311,10 @@ spec:
       nodePort: 32001
   selector:
     app: mssql-container
-  clusterIP: 172.30.185.173
+#  clusterIP: 172.30.185.173
   type: LoadBalancer  
   externalIPs:
-    - 172.29.112.233
+#    - 172.29.112.233
   sessionAffinity: None
   externalTrafficPolicy: Cluster
 

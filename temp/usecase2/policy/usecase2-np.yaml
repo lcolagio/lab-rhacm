@@ -1,0 +1,57 @@
+apiVersion: policy.mcm.ibm.com/v1alpha1
+kind: Policy
+metadata:
+  name: usecase2-policy-networkpolicy
+  namespace: default
+  annotations:
+    policy.mcm.ibm.com/standards: Customer
+    policy.mcm.ibm.com/categories: Access Controm
+    policy.mcm.ibm.com/controls: Access Control 01 Ingress
+spec:
+  complianceType: musthave
+  remediationAction: enforce  #   to inform only: inform
+
+  disabled: false
+  namespaces:
+    exclude: ["kube-*"]
+    include: ["mssql-persistent"]
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        kind: NetworkPolicy # deny network request
+        apiVersion: networking.k8s.io/v1
+        metadata:
+          name: usecase2-deny-from-other-namespaces
+        spec:
+          podSelector:
+            matchLabels:
+          ingress:
+          - from:
+            - podSelector: {} # accept ingress from all pods within this namespace only
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: usecase2-binding-policy-networkpolicy
+  namespace: default
+placementRef:
+  name: usecase2-placement-policy-networkpolicy
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: usecase2-policy-networkpolicy
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: usecase2-placement-policy-networkpolicy
+  namespace: default
+spec:
+  clusterConditions:
+  - type: OK
+  clusterSelector:
+    matchExpressions: []
+    matchLabels:
+      usecase2: deploy
