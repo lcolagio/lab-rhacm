@@ -1,0 +1,66 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-from-openshift-ingress-namespace
+  namespace: mssql-persistent
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: openshift-ingress
+  policyTypes:
+    - Ingress
+
+
+---
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-from-default-namespace
+  namespace: mssql-persistent
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: default
+  policyTypes:
+    - Ingress
+
+
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-from-default-namespace
+  namespace: usecase2-app
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: default
+  policyTypes:
+    - Ingress
+
+
+  kind: NetworkPolicy # deny network request
+  apiVersion: networking.k8s.io/v1
+  metadata:
+    name: deny-from-other-namespaces
+  spec:
+    podSelector:
+      matchLabels:
+    ingress:
+    - from:
+      - podSelector: {} # accept ingress from all pods within this namespace only
+
+
+
+
+

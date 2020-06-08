@@ -9,12 +9,12 @@ metadata:
     policy.mcm.ibm.com/controls: Access Control 01 - deny from other namespaces
 spec:
   complianceType: musthave
-  remediationAction: enforce  #   to inform only: inform
+  remediationAction: inform  #   to inform only: enforce
 
   disabled: false
   namespaces:
     exclude: ["kube-*"]
-    include: ["mssql-persistent"]
+    include: ["usecase2-app"]
   object-templates:
     - complianceType: musthave
       objectDefinition:
