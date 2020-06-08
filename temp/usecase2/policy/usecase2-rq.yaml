@@ -1,0 +1,55 @@
+apiVersion: policy.mcm.ibm.com/v1alpha1
+kind: Policy
+metadata:
+  name: usecase2-policy-ressourcequota
+  namespace: default
+  annotations:
+    policy.mcm.ibm.com/standards: My Customer foo 
+    policy.mcm.ibm.com/categories: My Access Control Category
+    policy.mcm.ibm.com/controls: Access Control 01 - ressourcequota
+spec:
+  complianceType: musthave
+  remediationAction: enforce  #   to inform only: inform
+
+  disabled: false
+  namespaces:
+    exclude: ["kube-*"]
+    include: ["usecase2-app"]
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        kind: ResourceQuota
+        apiVersion: v1
+        metadata:
+          name: usecase2-ressourcequota
+          namespace: usecase2-app
+        spec:
+          hard:
+            pods: '2'
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: usecase2-binding-policy-ressourcequota
+  namespace: default
+placementRef:
+  name: usecase2-placement-policy-ressourcequota
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: usecase2-policy-ressourcequota
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: usecase2-placement-policy-ressourcequota
+  namespace: default
+spec:
+  clusterConditions:
+  - type: OK
+  clusterSelector:
+    matchExpressions: []
+    matchLabels:
+      usecase2: deploy
