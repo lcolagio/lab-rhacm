@@ -1,4 +1,4 @@
-## SCC ##
+## create SCC ##
 oc create -f - <<EOF
 
 kind: SecurityContextConstraints
@@ -126,7 +126,7 @@ spec:
   
 EOF
 
-### MSQL SERVER ###
+### create MSQLSERVER db ###
 oc create -f - <<EOF
 
 ---
@@ -203,7 +203,32 @@ spec:
 
 EOF
 
-### APP ###
+oc create -f - <<EOF
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mssql-service
+  namespace: mssql-persistent
+spec:
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+      nodePort: 32001
+  selector:
+    app: mssql-container
+#  clusterIP: 172.30.185.173
+  type: LoadBalancer  
+  externalIPs:
+#    - 172.29.112.233
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+
+EOF
+
+
+### create APP frontend ###
 
 oc create -f - <<EOF
 
@@ -296,26 +321,3 @@ spec:
 EOF
 
 
-oc create -f - <<EOF
-
-kind: Service
-apiVersion: v1
-metadata:
-  name: mssql-service
-  namespace: mssql-persistent
-spec:
-  ports:
-    - protocol: TCP
-      port: 1433
-      targetPort: 1433
-      nodePort: 32001
-  selector:
-    app: mssql-container
-#  clusterIP: 172.30.185.173
-  type: LoadBalancer  
-  externalIPs:
-#    - 172.29.112.233
-  sessionAffinity: None
-  externalTrafficPolicy: Cluster
-
-EOF
