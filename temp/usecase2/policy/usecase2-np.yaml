@@ -4,9 +4,9 @@ metadata:
   name: usecase2-policy-networkpolicy
   namespace: default
   annotations:
-    policy.mcm.ibm.com/standards: Customer
-    policy.mcm.ibm.com/categories: Access Controm
-    policy.mcm.ibm.com/controls: Access Control 01 Ingress
+    policy.mcm.ibm.com/standards: My Customer foo 
+    policy.mcm.ibm.com/categories: My Access Control Category
+    policy.mcm.ibm.com/controls: Access Control 01 - deny from other namespaces
 spec:
   complianceType: musthave
   remediationAction: enforce  #   to inform only: inform
