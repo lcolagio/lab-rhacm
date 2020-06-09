@@ -1,0 +1,199 @@
+---
+  
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: hacm-channel-group1-all-ns-view
+  selfLink: >-
+    /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/hacm-channel-group1-all-ns-view
+  uid: bfd0e163-9095-4f7a-911b-7a7ed693ea8b
+  resourceVersion: '2614607'
+  creationTimestamp: '2020-06-09T13:35:38Z'
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-view
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-all-ns-view
+  selfLink: >-
+    /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/rhacm-channel-group1-all-ns-view
+  uid: 874d6345-c68a-44a8-bd9c-787669f219e2
+  resourceVersion: '2628573'
+  creationTimestamp: '2020-06-09T14:04:32Z'
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-view
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-usecase1-app-crdview
+  selfLink: >-
+    /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/rhacm-channel-group1-usecase1-app-crdview
+  uid: 149c912e-a26d-49d4-b161-fd94b44b3700
+  resourceVersion: '2631071'
+  creationTimestamp: '2020-06-09T14:09:46Z'
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-crdview
+
+
+
+##############
+
+
+oc create -f - <<EOF
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-usecase1-app-view
+  namespace: usecase1-app
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-view
+
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-usecase1-app-crdview
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-crdview
+
+
+EOF
+
+
+#### to del ###
+oc create -f - <<EOF
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-ns1-admin
+  namespace: ns1
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-admin
+
+EOF
+#### to del ###
+
+
+
+oc create -f - <<EOF
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-channel-group1-all-ns-view
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: channels.apps.open-cluster-management.io-v1-view
+
+
+EOF
+
+
+oc create -f - <<EOF
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-application-group1-ns1-amdin
+  namespace: ns1
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: applications.app.k8s.io-v1beta1-admin
+EOF
+
+oc create -f - <<EOF
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-deployables-group1-ns1-admin
+  namespace: ns1
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: deployables.apps.open-cluster-management.io-v1-admin
+
+EOF
+
+oc create -f - <<EOF
+
+oc create -f - <<EOF
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rhacm-subscription-group1-ns1-admin
+  namespace: ns1
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: group1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: applications.app.k8s.io-v1beta1-admin
+EOF
+
+
+EOF
+
+
+oc create -f - <<EOF
+
+EOF
