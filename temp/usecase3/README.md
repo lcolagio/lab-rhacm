@@ -19,9 +19,10 @@ In this use case we are going to deploy a sample application `mssql-example-app`
     oc new-project usecase3-app
     oc new-project usecase3-channel
     
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/channel.yaml
+#    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/channel.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/application.yaml
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription.yaml
+#    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription-to-channel1.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/placementrule.yaml
     ~~~
 
