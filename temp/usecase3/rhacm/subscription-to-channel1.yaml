@@ -9,7 +9,7 @@
       apps.open-cluster-management.io/github-path: temp/usecase3/application
       apps.open-cluster-management.io/github-branch: master 
   spec:
-    channel: usecase3-channel/usecase3-channel
+    channel: usecase1-channel/usecase1-channel
     placement:
       placementRef:
         name: usecase3-placementrule
