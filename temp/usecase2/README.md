@@ -71,7 +71,7 @@ In this use case we are going to deploy a sample application `mssql-example-app`
     # on cluster Hub
     oc delete subscription usecase2-subscription1 -n usecase2-app
     oc delete placementrule usecase2-placementrule -n usecase2-app
-    oc delete applications usecase2-appl -n usecase2-app
+    oc delete applications usecase2-app -n usecase2-app
     oc delete channel usecase2-channel -n usecase2-channel
     
     oc delete project usecase2-channel
