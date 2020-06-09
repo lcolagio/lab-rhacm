@@ -57,6 +57,31 @@ In this use case we are going to deploy a sample application `mssql-example-app`
     usecase3-app              usecase3-subscription1-usecase3-application-usecase3-ns-namespace               Namespace       v1                                   83s
     ~~~
 
+2.1 Check role amdin
+
+   ~~~sh
+   # cluster Hub
+   oc get rolebinding  -n usecase3-app
+   >
+    NAME                    AGE
+    admin                   6m52s
+    system:deployers        6m52s
+    system:image-builders   6m52s
+    system:image-pullers    6m53s
+    
+    oc get rolebinding admin -o yaml | grep user1
+    >
+    name: user1
+
+   # cluster Managed
+   oc get rolebinding  -n usecase3-app
+   >
+    NAME                    AGE 
+    system:deployers        6m52s
+    system:image-builders   6m52s
+    system:image-pullers    6m53s
+   ~~~
+
 3. How to edit an component ACM
 
     ~~~sh
