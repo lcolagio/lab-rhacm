@@ -8,25 +8,23 @@ In this use case we are going to deploy a sample application `mssql-example-app`
 
 1. Create the different ACM components we will be using in this example: `Channel`, `PlacementRule`, `Application` and `Subscription`:
 
-    ~~~sh
-    # add use to scc mssql-persistent-scc
-    oc adm policy add-scc-to-user mssql-persistent-scc -z mssql-persistent-sa -n usecase3-ap
-    ~~~
- 
+
     ~~~sh
     oc new-project usecase3-app
     oc new-project usecase3-channel
     
-    #    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/channel.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/channel.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/application.yaml
-    #    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription.yaml
-    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription-to-channel1.yaml
+    oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription.yaml
     oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/placementrule.yaml
+    
+    # oc create -f https://raw.githubusercontent.com/lcolagio/lab-rhacm/master/temp/usecase3/rhacm/subscription-to-channel1.yaml
+    
     ~~~
 
 2.  Check ACM components:
 
-    created project
+    go to created project
 
     ~~~sh
     oc get project | grep usecase3
@@ -35,17 +33,22 @@ In this use case we are going to deploy a sample application `mssql-example-app`
     created ACM Components
 
     ~~~sh
-    oc get applications -A | grep usecase3
-    oc get channel -A | grep usecase3
-    oc get subscription -A | grep usecase3
-    oc get placementrule -A | grep usecase3
+    oc get applications -n usecase3-app | grep usecase3
+    oc get channel -n usecase3-channel | grep usecase3
+    oc get subscription -n usecase3-app | grep usecase3
+    oc get placementrule -n usecase3-app | grep usecase3
 
-    oc describe subscription usecase3-subscription1 -n usecase3-app
+    oc describe subscription usecase3-subscription -n usecase3-app
+
+    #    oc describe subscription usecase3-subscription1 -n usecase3-app
     ~~~
 
 
     ~~~sh
-    oc get deployable -A | grep usecase3
+    oc get deployable -n usecase3-app | grep usecase3
+    oc get deployable -n ocp3 | grep usecase3
+    oc get deployable -n ocp4 | grep usecase3
+    
     ~~~
     output: 
     ~~~

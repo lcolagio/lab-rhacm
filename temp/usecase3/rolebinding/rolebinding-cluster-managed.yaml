@@ -1,0 +1,37 @@
+# Log with cluster admin role
+
+oc create -f - <<EOF
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: admin_andrew
+  namespace: ocp3
+subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: andrew
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+
+EOF
+
+oc create -f - <<EOF
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: admin_andrew
+  namespace: ocp4
+subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: andrew
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+
+EOF
