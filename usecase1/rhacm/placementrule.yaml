@@ -7,8 +7,8 @@ metadata:
     app: usecase1
 spec:
   clusterConditions:
-    - type: OK
+    - status: 'True'
+      type: ManagedClusterConditionAvailable
   clusterSelector:
-    matchExpressions: []
     matchLabels:
-      env: dev
+      environment: dev
